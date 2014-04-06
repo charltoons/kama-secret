@@ -21,7 +21,7 @@ if ('development' == app.get('env'))
   app.use(express.errorHandler())
 
 app.get '/', (req, res, next)->
-  res.render('index', { title: 'Express' })
+  res.render 'index'
 
 http.createServer(app).listen app.get('port'), ->
   console.log('Express server listening on port ' + app.get('port'))
