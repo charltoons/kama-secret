@@ -20,8 +20,21 @@ app.use(express.static(path.join(__dirname, 'public')))
 if ('development' == app.get('env'))
   app.use(express.errorHandler())
 
+try
+  config = require('./config.json')
+catch
+  console.log('No config.json, falling back to environment vars')
+  config = process.env
+
+AWS_ACCESS_KEY = config.AWS_ACCESS_KEY;
+AWS_SECRET_KEY = config.AWS_SECRET_KEY;
+S3_BUCKET = config.S3_BUCKET
+
 app.get '/', (req, res, next)->
   res.render 'index'
+
+app.get '/sign_s3', (req, res, next)->
+
 
 http.createServer(app).listen app.get('port'), ->
   console.log('Express server listening on port ' + app.get('port'))
