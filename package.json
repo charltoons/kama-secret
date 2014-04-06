@@ -1,6 +1,6 @@
 {
   "name": "application-name",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -9,9 +9,14 @@
     "express": "3.5.1",
     "jade": "*",
     "crypto": "0.0.3",
-    "knox": "~0.8.9"
+    "knox": "~0.8.9",
+    "coffee-script": "~1.7.1"
   },
   "devDependencies": {
     "nodemon": "~1.0.17"
+  },
+  "subdomain": "kamasecret",
+  "engines": {
+    "node": "0.10.x"
   }
 }
