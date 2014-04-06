@@ -2,9 +2,5 @@ extends layout
 
 block content
   h1 Kama Secret
-  input#files(type="file")
-  #preview
-    img(src="")
-  form(method="POST", action="/submit_form")
-    input(type="hidden", value="")
-    input(type="submit")
+  input#files(type="file", accept="image/jpeg", capture="camera")
+  button Add Your Secret

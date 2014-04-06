@@ -6,7 +6,7 @@ function s3_upload(){
             // $('#status').html('Upload progress: ' + percent + '% ' + message);
         },
         onFinishS3Put: function(public_url) {
-            alert('finished')
+            window.location.href = "/view"
             // $('#status').html('Upload completed. Uploaded to: '+ public_url);
             // $("#avatar_url").val(public_url);
             // $("#preview").html('<img src="'+public_url+'" style="width:300px;" />');
@@ -21,5 +21,8 @@ function s3_upload(){
 * Listen for file selection:
 */
 $(document).ready(function() {
+    $('button').click(function(){
+      $('#files').click();
+    });
     $('#files').on("change", s3_upload);
 });

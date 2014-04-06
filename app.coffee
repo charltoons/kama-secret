@@ -34,6 +34,9 @@ S3_BUCKET = config.S3_BUCKET
 app.get '/', (req, res, next)->
   res.render 'index'
 
+app.get '/view', (req, res, next)->
+  res.render 'view'
+
 app.get '/sign_s3', (req, res, next)->
     object_name = req.query.s3_object_name
     mime_type = req.query.s3_object_type
