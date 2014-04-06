@@ -75,7 +75,8 @@ Unless required by applicable law or agreed to in writing, software distributed 
       xhr = new XMLHttpRequest();
       type = opts && opts.type || file.type;
       name = opts && opts.name || file.name;
-      xhr.open('GET', this.s3_sign_put_url + '?s3_object_type=' + type + '&s3_object_name=' + encodeURIComponent(name), true);
+      xhr.open('GET', this.s3_sign_put_url + '?s3_object_type=' + type + '&s3_object_name=' + encodeURIComponent('kama-'+Date.now()+ '.jpg'), true);
+      // xhr.open('GET', this.s3_sign_put_url + '?s3_object_type=' + type + '&s3_object_name=' + encodeURIComponent(name), true);
       xhr.onreadystatechange = function(e) {
         var result;
         if (this.readyState === 4 && this.status === 200) {
