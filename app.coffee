@@ -24,13 +24,15 @@ if ('development' == app.get('env'))
 
 try
   config = require('./config.json')
+  AWS_ACCESS_KEY = config.AWS_ACCESS_KEY
+  AWS_SECRET_KEY = config.AWS_SECRET_KEY
+  S3_BUCKET = config.S3_BUCKET
 catch
   console.log('No config.json, falling back to environment vars')
-  config = process.env
+  AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY
+  AWS_SECRET_KEY = process.env.AWS_SECRET_KEY
+  S3_BUCKET = process.env.S3_BUCKET
 
-AWS_ACCESS_KEY = config.AWS_ACCESS_KEY
-AWS_SECRET_KEY = config.AWS_SECRET_KEY
-S3_BUCKET = config.S3_BUCKET
 
 client = knox.createClient
     key: AWS_ACCESS_KEY
