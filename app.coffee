@@ -2,6 +2,7 @@ express = require('express')
 http = require('http')
 path = require('path')
 crypto = require('crypto')
+knox = require('knox')
 
 app = express()
 
@@ -31,11 +32,21 @@ AWS_ACCESS_KEY = config.AWS_ACCESS_KEY
 AWS_SECRET_KEY = config.AWS_SECRET_KEY
 S3_BUCKET = config.S3_BUCKET
 
+client = knox.createClient
+    key: AWS_ACCESS_KEY
+    secret: AWS_SECRET_KEY
+    bucket: S3_BUCKET
+
 app.get '/', (req, res, next)->
   res.render 'index'
 
 app.get '/view', (req, res, next)->
-  res.render 'view'
+  client.list { prefix: 'kama' }, (err, data)->
+    images = []
+    for file in data.Contents
+      images.push 'https://s3.amazonaws.com/'+S3_BUCKET+'/'+file.Key
+    console.log(images)
+    res.render 'view', images: images
 
 app.get '/sign_s3', (req, res, next)->
     object_name = req.query.s3_object_name

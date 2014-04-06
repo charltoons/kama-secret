@@ -2,3 +2,7 @@ extends layout
 
 block content
   h1 Kama Secrets View
+  ul.images
+    each image in images
+      li.image
+        img(src=image)
