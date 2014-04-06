@@ -34,6 +34,28 @@ app.get '/', (req, res, next)->
   res.render 'index'
 
 app.get '/sign_s3', (req, res, next)->
+    object_name = req.query.s3_object_name
+    mime_type = req.query.s3_object_type
+
+    now = new Date()
+    expires = Math.ceil((now.getTime() + 10000)/1000)
+    amz_headers = "x-amz-acl:public-read"
+
+    put_request = "PUT\n\n"+mime_type+"\n"+expires+"\n"+amz_headers+"\n/"+S3_BUCKET+"/"+object_name
+
+    signature = crypto.createHmac('sha1', AWS_SECRET_KEY).update(put_request).digest('base64')
+    signature = encodeURIComponent(signature.trim())
+    signature = signature.replace('%2B','+')
+
+    url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+object_name
+
+    credentials =
+        signed_request: url+"?AWSAccessKeyId="+AWS_ACCESS_KEY+"&Expires="+expires+"&Signature="+signature
+        url: url
+
+    # res.write(JSON.stringify(credentials));
+    res.json(credentials)
+    res.end()
 
 
 http.createServer(app).listen app.get('port'), ->
