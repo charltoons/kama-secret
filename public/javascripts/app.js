@@ -12,7 +12,7 @@ function s3_upload(){
             // $("#preview").html('<img src="'+public_url+'" style="width:300px;" />');
         },
         onError: function(status) {
-            alert('error')
+            console.error('error', status)
             // $('#status').html('Upload error: ' + status);
         }
     });

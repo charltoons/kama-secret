@@ -1,6 +1,7 @@
 express = require('express')
 http = require('http')
 path = require('path')
+crypto = require('crypto')
 
 app = express()
 
@@ -26,8 +27,8 @@ catch
   console.log('No config.json, falling back to environment vars')
   config = process.env
 
-AWS_ACCESS_KEY = config.AWS_ACCESS_KEY;
-AWS_SECRET_KEY = config.AWS_SECRET_KEY;
+AWS_ACCESS_KEY = config.AWS_ACCESS_KEY
+AWS_SECRET_KEY = config.AWS_SECRET_KEY
 S3_BUCKET = config.S3_BUCKET
 
 app.get '/', (req, res, next)->
@@ -53,8 +54,8 @@ app.get '/sign_s3', (req, res, next)->
         signed_request: url+"?AWSAccessKeyId="+AWS_ACCESS_KEY+"&Expires="+expires+"&Signature="+signature
         url: url
 
-    # res.write(JSON.stringify(credentials));
-    res.json(credentials)
+    res.write(JSON.stringify(credentials));
+    # res.json(credentials)
     res.end()
 
 
