@@ -126,6 +126,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
     };
 
     S3Upload.prototype.validate = function(file) {
+      if (file.type != 'image/jpeg') return 'only jpeg';
       return null;
     };
 
